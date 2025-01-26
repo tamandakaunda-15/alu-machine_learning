@@ -2,9 +2,9 @@
 import numpy as np
 
 """
-This module contains a function to perform matrix multiplication.
-It takes two matrices as input and returns their element-wise multiplication 
-if the matrices are compatible. Otherwise, it returns None.
+This module contains a function that performs matrix multiplication.
+It takes two matrices, mat1 and mat2, and returns their product.
+If the matrices cannot be multiplied due to incompatible dimensions, None is returned.
 """
 
 def mat_mul(mat1, mat2):
