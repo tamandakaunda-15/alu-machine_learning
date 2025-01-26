@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
+"""
+This module provides a function to concatenate two arrays.
+"""
 
-cat_arrays = __import__('6-howdy_partner').cat_arrays
+def cat_arrays(arr1, arr2):
+    """
+    Concatenates two arrays.
 
-arr1 = [1, 2, 3, 4, 5]
-arr2 = [6, 7, 8]
-print(cat_arrays(arr1, arr2))  # Output: [1, 2, 3, 4, 5, 6, 7, 8]
-print(arr1)  # Output: [1, 2, 3, 4, 5]
-print(arr2)  # Output: [6, 7, 8]
+    Args:
+        arr1 (list of int/float): The first array.
+        arr2 (list of int/float): The second array.
+
+    Returns:
+        list: A new list containing the elements of arr1 followed by elements of arr2.
+    """
+    return arr1 + arr2
