@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 """
-This module provides a function to concatenate two 2D matrices 
+This module provides a function to concatenate two 2D matrices
 along the given axis.
 """
-
 
 def cat_matrices2D(mat1, mat2, axis=0):
     """
