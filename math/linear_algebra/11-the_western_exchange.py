@@ -5,6 +5,7 @@
 This module provides a function to transpose a numpy-compatible matrix.
 """
 
+
 def np_transpose(matrix):
     """
     Transposes a given numpy-compatible matrix.
