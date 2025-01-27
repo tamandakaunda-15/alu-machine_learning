@@ -5,6 +5,7 @@ This module contains a function mat_mul that multiplies two 2D matrices.
 If the matrices cannot be multiplied, the function returns None.
 """
 
+
 def mat_mul(mat1, mat2):
     """
     Multiplies two matrices mat1 and mat2 and returns the resulting matrix.
