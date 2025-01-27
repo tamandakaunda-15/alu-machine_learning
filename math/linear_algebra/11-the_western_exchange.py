@@ -1,16 +1,17 @@
-import numpy as np
-np_transpose = __import__('11-the_western_exchange').np_transpose
+!/usr/bin/env python3
+"""
 
-mat1 = np.array([1, 2, 3, 4, 5, 6])
-mat2 = np.array([])
-mat3 = np.array([[[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]],
-                 [[11, 12, 13, 14, 15], [16, 17, 18, 19, 20]]])
+This module provides a function to transpose a numpy-compatible matrix.
+"""
 
-print(np_transpose(mat1))
-print(mat1)
+def np_transpose(matrix):
+    """
+    Transposes a given numpy-compatible matrix.
 
-print(np_transpose(mat2))
-print(mat2)
+    Args:
+        matrix: A numpy.ndarray to be transposed.
 
-print(np_transpose(mat3))
-print(mat3)
+    Returns:
+        numpy.ndarray: A new array representing the transposed matrix.
+    """
+    return matrix.T
