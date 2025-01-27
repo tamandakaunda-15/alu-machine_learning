@@ -1,11 +1,19 @@
-import numpy as np
-np_shape = __import__('10-ill_use_my_scale').np_shape
+#!/usr/bin/env python3
 
-mat1 = np.array([1, 2, 3, 4, 5, 6])
-mat2 = np.array([])
-mat3 = np.array([[[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]], 
-                 [[11, 12, 13, 14, 15], [16, 17, 18, 19, 20]]])
+"""
+This module provides a function to calculate the shape of a numpy.ndarray.
+"""
 
-print(np_shape(mat1))  # Output: (6,)
-print(np_shape(mat2))  # Output: (0,)
-print(np_shape(mat3))  # Output: (2, 2, 5)
+
+def np_shape(matrix):
+    """
+    Calculates the shape of a given numpy.ndarray.
+
+    Args:
+        matrix: A numpy.ndarray whose shape is to be determined.
+
+    Returns:
+        tuple: A tuple of integers representing the shape of the matrix.
+    """
+    return matrix.shape
+
