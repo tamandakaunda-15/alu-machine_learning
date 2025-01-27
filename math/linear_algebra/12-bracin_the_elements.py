@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 This module defines a function to perform element-wise operations on matrices.
 
