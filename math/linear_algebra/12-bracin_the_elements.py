@@ -1,4 +1,15 @@
-#!/usr/bin/env python3
+"""
+This module defines a function to perform element-wise operations on matrices.
+
+The supported operations include:
+- Addition
+- Subtraction
+- Multiplication
+- Division
+
+These operations are performed without using loops or conditional statements.
+"""
+
 def np_elementwise(mat1, mat2):
     """
     Perform element-wise addition, subtraction, multiplication, and division
@@ -20,4 +31,9 @@ def np_elementwise(mat1, mat2):
     elementwise_product = mat1 * mat2
     elementwise_quotient = mat1 / mat2
 
-    return (elementwise_sum, elementwise_diff, elementwise_product, elementwise_quotient)
+    return (
+        elementwise_sum,
+        elementwise_diff,
+        elementwise_product,
+        elementwise_quotient,
+    )
