@@ -1,4 +1,5 @@
 !/usr/bin/env python3
+
 """
 
 This module provides a function to transpose a numpy-compatible matrix.
