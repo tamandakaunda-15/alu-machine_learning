@@ -16,4 +16,3 @@ def np_shape(matrix):
         tuple: A tuple of integers representing the shape of the matrix.
     """
     return matrix.shape
-
