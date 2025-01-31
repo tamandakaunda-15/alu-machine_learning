@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+
 """
 This module contains a function to determine the definiteness of a matrix.
 
@@ -9,7 +11,8 @@ A matrix can be classified as:
 - Negative semi-definite
 - Indefinite
 
-It uses eigenvalues of the matrix to make this determination, after verifying if the matrix is symmetric.
+It uses eigenvalues of the matrix to make this determination, after verifying 
+if the matrix is symmetric.
 """
 
 import numpy as np
