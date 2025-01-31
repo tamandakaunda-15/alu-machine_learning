@@ -11,8 +11,6 @@ Usage:
     a square matrix as input.
 """
 
-import numpy as np  # Importing numpy for matrix operations (for compatibility with numpy 1.15)
-
 def determinant(matrix):
     """Calculates the determinant of a square matrix."""
     
@@ -43,8 +41,3 @@ def determinant(matrix):
         det += ((-1) ** col) * matrix[0][col] * determinant(sub_matrix)
     
     return det
-
-# Sample test
-if __name__ == "__main__":
-    matrix = [[1, 2, 3], [0, 1, 4], [5, 6, 0]]
-    print(f"Determinant: {determinant(matrix)}")
