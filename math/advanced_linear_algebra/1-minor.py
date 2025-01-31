@@ -1,4 +1,19 @@
 #!/usr/bin/env python3
+
+
+"""
+This module contains functions for matrix operations, including calculating the determinant 
+and minor matrix of a square matrix.
+
+The `determinant` function calculates the determinant of a square matrix using recursion.
+The `minor` function calculates the minor matrix of a given square matrix.
+
+Functions:
+    - determinant(matrix): Returns the determinant of the matrix.
+    - minor(matrix): Returns the minor matrix of the matrix.
+"""
+
+
 def determinant(matrix):
     """Calculates the determinant of a square matrix."""
     if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
