@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-
 """
 Module to calculate matrix operations such as determinant, minor, cofactor, adjugate, and inverse.
+This module handles matrix inversion and related calculations for square matrices.
 """
 
 def determinant(matrix):
