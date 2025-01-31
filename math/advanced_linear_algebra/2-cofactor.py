@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def determinant(matrix):
     """Calculates the determinant of a square matrix."""
     if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
