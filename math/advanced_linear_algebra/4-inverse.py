@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+
+"""
+Module to calculate matrix operations such as determinant, minor, cofactor, adjugate, and inverse.
+"""
+
 def determinant(matrix):
     """Calculates the determinant of a matrix."""
     if len(matrix) == 1:
@@ -12,22 +18,38 @@ def determinant(matrix):
         det += ((-1) ** i) * matrix[0][i] * determinant(minor_mat)
     return det
 
+
 def minor(matrix):
     """Calculates the minor matrix of a matrix."""
-    return [[determinant([row[:j] + row[j+1:] for i, row in enumerate(matrix) if i != k])
-             for j in range(len(matrix))] for k in range(len(matrix))]
+    return [
+        [
+            determinant([row[:j] + row[j+1:] for i, row in enumerate(matrix) if i != k])
+            for j in range(len(matrix))
+        ]
+        for k in range(len(matrix))
+    ]
+
 
 def cofactor(matrix):
     """Calculates the cofactor matrix of a matrix."""
-    return [[(-1) ** (i + j) * matrix[i][j] for j in range(len(matrix))] for i in range(len(matrix))]
+    return [
+        [(-1) ** (i + j) * matrix[i][j] for j in range(len(matrix))]
+        for i in range(len(matrix))
+    ]
+
 
 def transpose(matrix):
     """Transposes a matrix."""
-    return [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
+    return [
+        [matrix[j][i] for j in range(len(matrix))]
+        for i in range(len(matrix[0]))
+    ]
+
 
 def adjugate(matrix):
     """Calculates the adjugate matrix of a matrix."""
     return transpose(cofactor(minor(matrix)))
+
 
 def inverse(matrix):
     """Calculates the inverse of a matrix."""
@@ -41,4 +63,7 @@ def inverse(matrix):
         return None
     
     adj = adjugate(matrix)
-    return [[adj[i][j] / det for j in range(len(matrix))] for i in range(len(matrix))]
+    return [
+        [adj[i][j] / det for j in range(len(matrix))]
+        for i in range(len(matrix))
+    ]
