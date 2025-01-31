@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def determinant(matrix):
     """Calculates the determinant of a matrix."""
     if len(matrix) == 1:
