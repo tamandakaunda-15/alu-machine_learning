@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-
-
 """
 This module contains a function to determine the definiteness of a matrix.
 
