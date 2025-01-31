@@ -12,6 +12,7 @@ Functions:
     - minor(matrix): Returns the minor matrix of the matrix.
 """
 
+
 def determinant(matrix):
     """Calculates the determinant of a square matrix."""
     if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
