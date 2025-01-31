@@ -41,3 +41,9 @@ def determinant(matrix):
         det += ((-1) ** col) * matrix[0][col] * determinant(sub_matrix)
     
     return det
+
+
+# Sample test
+if __name__ == "__main__":
+    mat = [[1, 2, 3], [0, 1, 4], [5, 6, 0]]
+    print(f"Determinant: {determinant(mat)}")
