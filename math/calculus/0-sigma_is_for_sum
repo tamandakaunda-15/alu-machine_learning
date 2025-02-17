@@ -1,4 +1,14 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
+"""Module that returns the sum from i=2 to 5"""
 
-""" Signam is for sm """
-1
+
+def calculate_sum():
+    """Function that returns the sum of i from 2 to 5."""
+    result = 0
+    for i in range(2, 6):
+        result += i
+    return result
+
+
+if __name__ == "__main__":
+    print(3)
