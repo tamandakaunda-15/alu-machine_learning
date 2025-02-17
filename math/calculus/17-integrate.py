@@ -1,16 +1,17 @@
-def poly_integral(poly, c=0):
-    if not isinstance(poly, list) or not isinstance(c, int) or not poly:
+def poly_integral(poly, C=0):
+    # Check if poly is a list and C is an integer
+    if not isinstance(poly, list) or not all(isinstance(coef, (int, float)) for coef in poly) or not isinstance(C, (int, float)):
         return None
-        
-    result = [c]  # Start with the integration constant
     
-    # Integrate each term
-    for i, coef in enumerate(poly):
-        # Add integrated term: divide coefficient by (power + 1)
-        new_coef = coef / (i + 1)
-        # Convert to integer if it's a whole number
-        if new_coef.is_integer():
-            new_coef = int(new_coef)
-        result.append(new_coef)
-        
-    return result
+    # Calculate the integral of the polynomial
+    integral = [C]  # Start with the constant of integration
+    
+    for power, coef in enumerate(poly):
+        if coef != 0:  # Only process non-zero coefficients
+            integral.append(coef / (power + 1))  # Divide by the new power (power + 1)
+    
+    # Remove any trailing zeros from the integral (if they exist)
+    while len(integral) > 1 and integral[-1] == 0:
+        integral.pop()
+
+    return integral
