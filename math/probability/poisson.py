@@ -33,13 +33,13 @@ class Poisson:
         """Calculates the value of the PMF for a given number of “successes”.
 
         Args:
-            k (int): The number of successes.
+            k (int or float): The number of successes.
 
         Returns:
             float: The PMF value for k.
         """
         if not isinstance(k, int):
-            k = int(k)  # Convert to integer if k is not an integer
+            k = math.floor(k)  # Convert to an integer safely
 
         if k < 0:
             return 0  # Poisson distribution is only defined for k >= 0
