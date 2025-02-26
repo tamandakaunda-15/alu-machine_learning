@@ -4,6 +4,7 @@
 Module that defines a Binomial distribution class.
 """
 
+
 class Binomial:
     """
     Represents a binomial distribution.
@@ -15,18 +16,21 @@ class Binomial:
 
     def __init__(self, data=None, n=1, p=0.5):
         """
-        Initializes the Binomial distribution with either data or parameters n and p.
+        Initializes the Binomial distribution with either data or
+ parameters n and p.
 
         If data is provided, n and p are estimated from the data. Otherwise,
         the values of n and p are set by the user.
 
         Args:
-            data (list, optional): List of observed binomial data to estimate the distribution.
+            data (list, optional): List of observed binomial data
+ to estimate the distribution.
             n (int, optional): The number of Bernoulli trials.
             p (float, optional): The probability of success.
 
         Raises:
-            ValueError: If n is not a positive value or p is not in the valid range.
+            ValueError: If n is not a positive value or p is
+ not in the valid range.
             TypeError: If data is not a list.
             ValueError: If data contains fewer than two data points.
         """
