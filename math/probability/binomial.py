@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+"""
+This module contains the Binomial class, which represents a binomial distribution.
+It can either estimate the distribution parameters from provided data
+ or use explicitly
+given values for the number of trials (n) and the probability of success (p).
+"""
+
+
 class Binomial:
     """
     Class that represents a binomial distribution
@@ -10,8 +18,8 @@ class Binomial:
         Initializes a Binomial instance.
 
         Args:
-            data (list, optional): List of data to estimate the
- distribution. Defaults to None.
+            data (list, optional): List of data to estimate the distribution.
+            Defaults to None.
             n (int, optional): Number of Bernoulli trials. Defaults to 1.
             p (float, optional): Probability of success. Defaults to 0.5.
 
