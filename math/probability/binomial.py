@@ -23,8 +23,8 @@ class Binomial:
         the values of n and p are set by the user.
 
         Args:
-            data (list, optional): List of observed binomial data
- to estimate the distribution.
+            data (list, optional): List of observed binomial data to estimate
+ the distribution.
             n (int, optional): The number of Bernoulli trials.
             p (float, optional): The probability of success.
 
@@ -41,13 +41,10 @@ class Binomial:
                 raise ValueError("data must contain multiple values")
 
             # Estimate p first (average successes per trial)
-            p_estimate = sum(data) / (len(data) * n) 
-           # This is the correct way to calculate p
+            p_estimate = sum(data) / (len(data) * n)
 
-           # Use the estimated p to calculate n (rounded to nearest integer)
-           n_estimate = round(sum(data) / p_estimate) 
-           # This ensures n is a rounded integer based on the estimated p
-
+            # Use the estimated p to calculate n (rounded to nearest integer)
+            n_estimate = round(sum(data) / p_estimate)
             self.n = n_estimate
             self.p = p_estimate
         else:
@@ -56,4 +53,4 @@ class Binomial:
             if not (0 < p < 1):
                 raise ValueError("p must be greater than 0 and less than 1")
             self.n = int(n)
-            self.p = float(p)
+ii            self.p = float(p)
