@@ -53,16 +53,19 @@ class Poisson:
         return result
 
     def pmf(self, k):
-        """Calculates the value of the PMF for a given number of 'successes'."""
+        """Calculates the value of the PMF for a given
+ number of 'successes'."""
         if not isinstance(k, int):
             k = int(k)
         if k < 0:
             return 0
-        pmf_value = (self.lambtha ** k) * self.exp(-self.lambtha) / self.factorial(k)
+        pmf_value = (self.lambtha ** k) * self.exp(-self.lambtha)
+ / self.factorial(k)
         return float("{:.10f}".format(pmf_value))
 
     def cdf(self, k):
-        """Calculates the value of the CDF for a given number of 'successes'."""
+        """Calculates the value of the CDF for a given number
+ of 'successes'."""
         if not isinstance(k, int):
             k = int(k)
         if k < 0:
