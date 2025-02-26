@@ -110,9 +110,6 @@ class Normal:
         # Return the PDF value
         return normalization * (2.718281828459045 ** exponent)
 
-    class Normal:
-    # Existing methods...
-
     def cdf(self, x):
         """
         Calculates the value of the CDF for a given x-value.
@@ -125,12 +122,12 @@ class Normal:
         """
         # Calculate the z-score for the given x
         z = self.z_score(x)
-        
+
         # Use the approximation for the error function (erf)
         t = 1.0 / (1.0 + 0.3275911 * abs(z))
         erf_approx = 1 - (0.254829592 * t - 0.284496736 * t**2 +
                           1.421413741 * t**3 - 1.453152027 * t**4 +
                           1.061405429 * t**5) * (2.718281828459045 ** (-z * z))
-        
+
         # CDF = 0.5 * (1 + erf(z / sqrt(2)))
         return 0.5 * (1 + erf_approx)
