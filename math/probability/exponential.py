@@ -31,7 +31,8 @@ class Exponential:
             self.lambtha = float(1 / (sum(data) / len(data)))
 
     def pdf(self, x):
-        """Calculates the probability density function (PDF) for a given time period x.
+        """Calculates the probability density function (PDF) for a given
+ time period x.
 
         Args:
             x (float): The time period.
