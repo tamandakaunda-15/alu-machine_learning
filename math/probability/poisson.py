@@ -3,6 +3,7 @@
 This module defines the Poisson class for modeling a Poisson distribution.
 """
 
+
 class Poisson:
     """Represents a Poisson distribution."""
 
@@ -50,22 +51,25 @@ class Poisson:
         return result
 
     def pmf(self, k):
-        """Calculates the value of the PMF for a given number of “successes”.
+    """Calculates the value of the PMF for a given number of “successes”.
 
-        Args:
-            k (int or float): The number of successes.
+    Args:
+        k (int or float): The number of successes.
 
-        Returns:
-            float: The PMF value for k.
-        """
-        k = round(k)  # More precise rounding
+    Returns:
+        float: The PMF value for k.
+    """
+    k = round(k)  # Ensure proper rounding
 
-        if k < 0:
-            return 0  # Poisson distribution is only defined for k >= 0
+    if k < 0:
+        return 0  # Poisson distribution is only defined for k >= 0
 
-        # Poisson PMF formula: (λ^k * e^(-λ)) / k!
-        lambtha_k = 1
-        for _ in range(k):
-            lambtha_k *= self.lambtha  # Compute λ^k manually
+    # Poisson PMF formula: (λ^k * e^(-λ)) / k!
+    lambtha_k = 1
+    for _ in range(k):
+        lambtha_k *= self.lambtha  # Compute λ^k manually
 
-        return (lambtha_k * self.exp(self.lambtha)) / self.factorial(k)
+    result = (lambtha_k * self.exp(self.lambtha)) / self.factorial(k)
+    
+    # Format to match exactly 10 decimal places
+    return float(f"{result:.10f}")  
