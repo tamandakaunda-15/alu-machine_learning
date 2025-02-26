@@ -2,6 +2,7 @@
 
 """Module for Poisson distribution."""
 
+
 class Poisson:
     """Represents a Poisson distribution."""
 
@@ -12,7 +13,7 @@ class Poisson:
             data (list, optional): List of data points to estimate lambtha.
             lambtha (float, optional): Expected number of occurrences.
                 Defaults to 1.0.
-                
+
         Raises:
             ValueError: If lambtha is not a positive value.
             TypeError: If data is not a list.
@@ -33,6 +34,28 @@ class Poisson:
         """Calculates the factorial of a number."""
         if n == 0 or n == 1:
             return 1
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+
+    def pmf(self, k):
+        """Calculates the probability mass function (PMF) for a given k."""
+        if k < 0:
+            return 0
+        k = int(k)
+        pmf_value = (self.lambtha ** k * self.factorial(k)) / \
+                    (2.7182818285 ** self.lambtha)
+        return round(pmf_value, 10)
+
+    def cdf(self, k):
+        """Calculates the cumulative distribution function (CDF) for a given k."""
+        if k < 0:
+            return 0
+        k = int(k)
+        cdf_value = sum(self.pmf(i) for i in range(k + 1))
+        return round(cdf_value, 10)
+
         result = 1
         for i in range(2, n + 1):
             result *= i
