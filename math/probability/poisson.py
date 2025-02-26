@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-"""Module for Poisson distribution."""
-
+import math
 
 class Poisson:
     """Represents a Poisson distribution."""
@@ -30,7 +29,7 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(sum(data) / len(data))
 
-   def pmf(self, k):
+    def pmf(self, k):
         """Calculates the value of the PMF for a given number of “successes”.
 
         Args:
