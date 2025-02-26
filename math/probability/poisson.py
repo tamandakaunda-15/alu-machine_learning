@@ -32,15 +32,17 @@ class Poisson:
             self.lambtha = float(sum(data) / len(data))
 
     def factorial(self, n):
-        """Computes factorial of n manually (more precise)."""
+        """Computes factorial of n manually."""
+        if n == 0 or n == 1:
+            return 1
         result = 1
         for i in range(2, n + 1):
             result *= i
         return result
 
     def exp(self, x):
-        """Computes e^(-x) using an improved Taylor series approximation."""
-        terms = 50  # Increase terms to improve precision
+        """Computes e^(-x) using a Taylor series approximation."""
+        terms = 20  # More terms increase accuracy
         result = 1.0
         power = 1.0
         factorial = 1.0
@@ -51,25 +53,23 @@ class Poisson:
         return result
 
     def pmf(self, k):
-    """Calculates the value of the PMF for a given number of “successes”.
+        """Calculates the value of the PMF for a given number of “successes”.
 
-    Args:
-        k (int or float): The number of successes.
+        Args:
+            k (int or float): The number of successes.
 
-    Returns:
-        float: The PMF value for k.
-    """
-    k = round(k)  # Ensure proper rounding
+        Returns:
+            float: The PMF value for k.
+        """
+        if not isinstance(k, int):
+            k = int(k)  # Convert to integer
 
-    if k < 0:
-        return 0  # Poisson distribution is only defined for k >= 0
+        if k < 0:
+            return 0  # Poisson distribution is only defined for k >= 0
 
-    # Poisson PMF formula: (λ^k * e^(-λ)) / k!
-    lambtha_k = 1
-    for _ in range(k):
-        lambtha_k *= self.lambtha  # Compute λ^k manually
+        # Poisson PMF formula: (λ^k * e^(-λ)) / k!
+        lambtha_k = 1
+        for _ in range(k):
+            lambtha_k *= self.lambtha  # Compute lambtha^k manually
 
-    result = (lambtha_k * self.exp(self.lambtha)) / self.factorial(k)
-    
-    # Format to match exactly 10 decimal places
-    return float(f"{result:.10f}")  
+        return (lambtha_k * self.exp(self.lambtha)) / self.factorial(k)
