@@ -7,6 +7,7 @@ This module defines a class that represents a binomial distribution. It can
 be initialized with data or the number of trials (n) and probability (p).
 """
 
+
 class Binomial:
     """
     A class that represents a binomial distribution.
@@ -24,8 +25,8 @@ class Binomial:
     def __init__(self, data=None, n=1, p=0.5):
         """
         Initializes the Binomial distribution.
-
-        If `data` is provided, `n` and `p` will be calculated based on the data.
+        If `data` is provided, `n` and `p` will be calculated based on the
+ data.
         Otherwise, the provided `n` and `p` values will be used.
 
         Args:
@@ -52,10 +53,19 @@ class Binomial:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
 
+            # Print the data for debugging purposes
+            print(f"Data: {data}")
+
             # Calculate p from data
             successes = sum(data)
             self.n = len(data)  # Number of trials
             self.p = successes / self.n  # p is the proportion of successes
 
+            # Print the calculated p for debugging purposes
+            print(f"Calculated p: {self.p}")
+
+            # Validate p to be within the valid range
             if not (0 < self.p < 1):
                 raise ValueError("p must be greater than 0 and less than 1")
+
+            print(f"n: {self.n}, p: {self.p}")  # Print n and p for debugging
