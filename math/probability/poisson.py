@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import math
-
 """Module for Poisson distribution."""
 
 
@@ -32,6 +30,29 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(sum(data) / len(data))
 
+    def factorial(self, n):
+        """Calculates the factorial of a number."""
+        if n == 0 or n == 1:
+            return 1
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+
+    def exp(self, x):
+        """Calculates the exponential of a number (e^x)."""
+        result = 1
+        term = 1
+        n = 1
+        # Use series expansion to approximate e^x
+        while True:
+            term *= x / n
+            result += term
+            n += 1
+            if abs(term) < 1e-10:  # Convergence threshold
+                break
+        return result
+
     def cdf(self, k):
         """Calculates the value of the CDF for a given number of “successes”."""
         # If k is not an integer, convert it to an integer
@@ -45,6 +66,6 @@ class Poisson:
         # Calculate the CDF using the formula for Poisson distribution
         cdf_value = 0
         for i in range(k + 1):
-            cdf_value += (self.lambtha ** i) * math.exp(-self.lambtha) / math.factorial(i)
+            cdf_value += (self.lambtha ** i) * self.exp(-self.lambtha) / self.factorial(i)
         
         return cdf_value
