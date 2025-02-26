@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+"""
+Normal Distribution Class
+
+This module contains the Normal class which represents a normal distribution
+and provides methods to calculate the z-score, x-value, and PDF of the distribution.
+"""
 
 
 class Normal:
@@ -98,7 +104,7 @@ class Normal:
         """
         # Calculate the exponent term
         exponent = -0.5 * ((x - self.mean) ** 2) / (self.stddev ** 2)
-        
+    
         # Calculate the normalization factor
         normalization = 1 / (self.stddev * (2 * 3.141592653589793) ** 0.5)
         
