@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-This module defines a class Normal that represents a normal distribution.
-
-The Normal class allows the calculation of the mean and standard deviation
-of a set of data or the use of a specified mean and standard deviation.
-"""
-
-
 class Normal:
     """
     A class that represents a normal distribution.
@@ -20,6 +12,15 @@ class Normal:
         __init__(self, data=None, mean=0., stddev=1.):
             Initializes the Normal distribution, either from given data or
             using specified mean and standard deviation values.
+
+        z_score(self, x):
+            Calculates the z-score for a given x-value.
+
+        x_value(self, z):
+            Calculates the x-value for a given z-score.
+
+        pdf(self, x):
+            Calculates the value of the PDF for a given x-value.
     """
 
     def __init__(self, data=None, mean=0., stddev=1.):
@@ -30,12 +31,9 @@ class Normal:
         the data. Otherwise, uses the given mean and standard deviation.
 
         Args:
-            data (list, optional): A list of data points to estimate the
-                  distribution.
-            mean (float, optional): The mean of the distribution
-                 (default is 0).
-            stddev (float, optional): The standard deviation of the
-                               distribution (default is 1).
+            data (list, optional): A list of data points to estimate the distribution.
+            mean (float, optional): The mean of the distribution (default is 0).
+            stddev (float, optional): The standard deviation of the distribution (default is 1).
 
         Raises:
             ValueError: If stddev is less than or equal to 0.
@@ -95,10 +93,10 @@ class Normal:
             float: The PDF value for the given x.
         """
         # Calculate the exponent term
-        exponent = -0.5 * ((x - self.mean) ** 2) / (self.stddev ** 
-
+        exponent = -0.5 * ((x - self.mean) ** 2) / (self.stddev ** 2)
+        
         # Calculate the normalization factor
         normalization = 1 / (self.stddev * (2 * 3.141592653589793) ** 0.5)
- 
+        
         # Return the PDF value
         return normalization * (2.718281828459045 ** exponent)
