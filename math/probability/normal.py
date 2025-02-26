@@ -95,5 +95,11 @@ class Normal:
         Returns:
             float: The PDF value for the given x.
         """
-        exponent = math.exp(-0.5 * ((x - self.mean) ** 2) / (self.stddev ** 2))
-        return (1 / (self.stddev * (2 * math.pi) ** 0.5)) * exponent
+        # Calculate the exponent term
+        exponent = -0.5 * ((x - self.mean) ** 2) / (self.stddev ** 2)
+        
+        # Calculate the normalization factor
+        normalization = 1 / (self.stddev * (2 * 3.141592653589793) ** 0.5)
+        
+        # Return the PDF value
+        return normalization * (2.718281828459045 ** exponent)
