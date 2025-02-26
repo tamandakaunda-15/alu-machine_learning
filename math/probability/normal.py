@@ -110,7 +110,7 @@ class Normal:
         # Return the PDF value
         return normalization * (2.718281828459045 ** exponent)
 
-    def cdf(self, x):
+        def cdf(self, x):
         """
         Calculates the value of the CDF for a given x-value.
 
@@ -120,10 +120,10 @@ class Normal:
         Returns:
             float: The CDF value for the given x.
         """
-        # Calculate z-score
+        # Compute the z-score
         z = (x - self.mean) / (self.stddev * (2 ** 0.5))
 
-        # Constants for the approximation of erf
+        # Constants for the erf approximation
         a1 = 0.254829592
         a2 = -0.284496736
         a3 = 1.421413741
@@ -131,12 +131,17 @@ class Normal:
         a5 = 1.061405429
         p = 0.3275911
 
-        # Compute the approximation of erf(z)
-        sign = 1 if z >= 0 else -1
+        # Approximate erf using numerical methods
         t = 1 / (1 + p * abs(z))
         erf_approx = 1 - (a1 * t + a2 * t ** 2 + a3 * t ** 3 +
                           a4 * t ** 4 + a5 * t ** 5) * (2.718281828459045 ** (-z * z))
-        erf_approx *= sign
 
-        # Compute final CDF
-        return 0.5 * (1 + erf_approx)
+        # Adjust sign for negative values
+        if z < 0:
+            erf_approx = -erf_approx
+
+        # Compute CDF using erf
+        cdf_value = 0.5 * (1 + erf_approx)
+
+        # Round to match expected precision
+        return round(cdf_value, 10)
