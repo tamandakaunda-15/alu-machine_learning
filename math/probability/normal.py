@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import math
 
 class Normal:
     """
@@ -38,8 +37,12 @@ class Normal:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
 
+            # Calculate mean manually
             self.mean = sum(data) / len(data)
-            self.stddev = math.sqrt(sum((x - self.mean) ** 2 for x in data) / len(data))
+
+            # Calculate standard deviation manually
+            variance = sum((x - self.mean) ** 2 for x in data) / len(data)
+            self.stddev = variance ** 0.5
         else:
             if stddev <= 0:
                 raise ValueError("stddev must be a positive value")
