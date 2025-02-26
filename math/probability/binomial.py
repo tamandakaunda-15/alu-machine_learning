@@ -2,11 +2,9 @@
 
 """
 This module contains the Binomial class, which represents a 
-binomial distribution. It can estimate distribution parameters 
-from data and compute the probability mass function (PMF).
+binomial distribution. It can estimate parameters from data and 
+compute the probability mass function (PMF).
 """
-
-from math import factorial
 
 class Binomial:
     """
@@ -54,6 +52,23 @@ class Binomial:
             self.p = p_est
             self.n = n_est
 
+    def factorial(self, num):
+        """
+        Computes the factorial of a number.
+
+        Args:
+            num (int): Number to compute the factorial for.
+
+        Returns:
+            int: Factorial of num.
+        """
+        if num == 0 or num == 1:
+            return 1
+        result = 1
+        for i in range(2, num + 1):
+            result *= i
+        return result
+
     def pmf(self, k):
         """
         Computes the probability mass function (PMF) for k 
@@ -70,8 +85,8 @@ class Binomial:
         if k < 0 or k > self.n:
             return 0
 
-        comb = factorial(self.n) / (factorial(k) * 
-                                    factorial(self.n - k))
+        comb = (self.factorial(self.n) // 
+                (self.factorial(k) * self.factorial(self.n - k)))
 
         pmf_value = comb * (self.p ** k) * ((1 - self.p) ** 
                                             (self.n - k))
