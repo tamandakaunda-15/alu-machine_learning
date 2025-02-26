@@ -3,7 +3,6 @@
 This module defines the Poisson class for modeling a Poisson distribution.
 """
 
-
 class Poisson:
     """Represents a Poisson distribution."""
 
@@ -32,17 +31,15 @@ class Poisson:
             self.lambtha = float(sum(data) / len(data))
 
     def factorial(self, n):
-        """Computes factorial of n manually."""
-        if n == 0 or n == 1:
-            return 1
+        """Computes factorial of n manually (more precise)."""
         result = 1
         for i in range(2, n + 1):
             result *= i
         return result
 
     def exp(self, x):
-        """Computes e^(-x) using a Taylor series approximation."""
-        terms = 20  # More terms increase accuracy
+        """Computes e^(-x) using an improved Taylor series approximation."""
+        terms = 50  # Increase terms to improve precision
         result = 1.0
         power = 1.0
         factorial = 1.0
@@ -61,8 +58,7 @@ class Poisson:
         Returns:
             float: The PMF value for k.
         """
-        if not isinstance(k, int):
-            k = int(k)  # Convert to integer
+        k = round(k)  # More precise rounding
 
         if k < 0:
             return 0  # Poisson distribution is only defined for k >= 0
@@ -70,6 +66,6 @@ class Poisson:
         # Poisson PMF formula: (λ^k * e^(-λ)) / k!
         lambtha_k = 1
         for _ in range(k):
-            lambtha_k *= self.lambtha  # Compute lambtha^k manually
+            lambtha_k *= self.lambtha  # Compute λ^k manually
 
         return (lambtha_k * self.exp(self.lambtha)) / self.factorial(k)
