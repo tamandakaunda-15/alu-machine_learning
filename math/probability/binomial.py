@@ -35,12 +35,12 @@ class Binomial:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            
-            # Calculate p first from data (average successes per trial)
-            p_estimate = sum(data) / len(data) / n  # Estimating p from data
-            
-            # Use p to calculate n (round to nearest integer)
-            n_estimate = round(sum(data) / p_estimate)  # Estimating n
+
+            # Estimate p first (average successes per trial)
+            p_estimate = sum(data) / (len(data) * n)
+
+            # Use the estimated p to calculate n (rounded to nearest integer)
+            n_estimate = round(sum(data) / p_estimate)
             self.n = n_estimate
             self.p = p_estimate
         else:
