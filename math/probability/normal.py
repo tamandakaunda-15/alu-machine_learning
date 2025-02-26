@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import math
 
 """
 This module defines a class Normal that represents a normal distribution.
