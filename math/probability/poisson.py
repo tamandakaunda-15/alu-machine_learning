@@ -29,3 +29,21 @@ class Poisson:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(sum(data) / len(data))
+
+   def pmf(self, k):
+        """Calculates the value of the PMF for a given number of “successes”.
+
+        Args:
+            k (int): The number of successes.
+
+        Returns:
+            float: The PMF value for k.
+        """
+        if not isinstance(k, int):
+            k = int(k)  # Convert to integer if k is not an integer
+
+        if k < 0:
+            return 0  # Poisson distribution is only defined for k >= 0
+
+        # Poisson PMF formula: (λ^k * e^(-λ)) / k!
+        return (self.lambtha ** k * math.exp(-self.lambtha)) / math.factorial(k)
