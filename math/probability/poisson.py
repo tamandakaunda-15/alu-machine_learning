@@ -2,7 +2,6 @@
 
 """Module for Poisson distribution."""
 
-
 class Poisson:
     """Represents a Poisson distribution."""
 
@@ -11,9 +10,9 @@ class Poisson:
 
         Args:
             data (list, optional): List of data points to estimate lambtha.
-            lambtha (float, optional): Expected number of occurrences. 
-                Defaults to 1.
-
+            lambtha (float, optional): Expected number of occurrences.
+                Defaults to 1.0.
+                
         Raises:
             ValueError: If lambtha is not a positive value.
             TypeError: If data is not a list.
@@ -54,35 +53,21 @@ class Poisson:
         return result
 
     def pmf(self, k):
-        """Calculates the value of the PMF for a given number of “successes”."""
-        # If k is not an integer, convert it to an integer
+        """Calculates the value of the PMF for a given number of 'successes'."""
         if not isinstance(k, int):
             k = int(k)
-        
-        # If k is negative, return 0 (Poisson distribution is for non-negative integers)
         if k < 0:
             return 0
-        
-        # Calculate the PMF using the formula for Poisson distribution
         pmf_value = (self.lambtha ** k) * self.exp(-self.lambtha) / self.factorial(k)
-        
-        # Round result to a precision of 10 decimal places
         return round(pmf_value, 10)
 
     def cdf(self, k):
-        """Calculates the value of the CDF for a given number of “successes”."""
-        # If k is not an integer, convert it to an integer
+        """Calculates the value of the CDF for a given number of 'successes'."""
         if not isinstance(k, int):
             k = int(k)
-        
-        # If k is out of range (negative), return 0
         if k < 0:
             return 0
-        
-        # Calculate the CDF using the formula for Poisson distribution
         cdf_value = 0
         for i in range(k + 1):
             cdf_value += (self.lambtha ** i) * self.exp(-self.lambtha) / self.factorial(i)
-        
-        # Round result to a precision of 10 decimal places
         return round(cdf_value, 10)
