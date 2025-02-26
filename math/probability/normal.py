@@ -120,14 +120,23 @@ class Normal:
         Returns:
             float: The CDF value for the given x.
         """
-        # Calculate the z-score for the given x
-        z = self.z_score(x)
+        # Calculate z-score
+        z = (x - self.mean) / (self.stddev * (2 ** 0.5))
 
-        # Use the approximation for the error function (erf)
-        t = 1.0 / (1.0 + 0.3275911 * abs(z))
-        erf_approx = 1 - (0.254829592 * t - 0.284496736 * t**2 +
-                          1.421413741 * t**3 - 1.453152027 * t**4 +
-                          1.061405429 * t**5) * (2.718281828459045 ** (-z * z / 2))
-        
-        # CDF = 0.5 * (1 + erf(z / sqrt(2)))
+        # Constants for the approximation of erf
+        a1 = 0.254829592
+        a2 = -0.284496736
+        a3 = 1.421413741
+        a4 = -1.453152027
+        a5 = 1.061405429
+        p = 0.3275911
+
+        # Compute the approximation of erf(z)
+        sign = 1 if z >= 0 else -1
+        t = 1 / (1 + p * abs(z))
+        erf_approx = 1 - (a1 * t + a2 * t ** 2 + a3 * t ** 3 +
+                          a4 * t ** 4 + a5 * t ** 5) * (2.718281828459045 ** (-z * z))
+        erf_approx *= sign
+
+        # Compute final CDF
         return 0.5 * (1 + erf_approx)
