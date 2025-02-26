@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+This module defines the Poisson class for modeling a Poisson distribution.
+"""
+
 
 class Poisson:
     """Represents a Poisson distribution."""
