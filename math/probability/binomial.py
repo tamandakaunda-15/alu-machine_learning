@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+Module that defines a Binomial distribution class.
+"""
+
 class Binomial:
     """
     Represents a binomial distribution.
@@ -8,19 +12,19 @@ class Binomial:
         n (int): The number of Bernoulli trials.
         p (float): The probability of a "success".
     """
-    
+
     def __init__(self, data=None, n=1, p=0.5):
         """
         Initializes the Binomial distribution with either data or parameters n and p.
 
         If data is provided, n and p are estimated from the data. Otherwise,
         the values of n and p are set by the user.
-        
+
         Args:
             data (list, optional): List of observed binomial data to estimate the distribution.
             n (int, optional): The number of Bernoulli trials.
             p (float, optional): The probability of success.
-            
+
         Raises:
             ValueError: If n is not a positive value or p is not in the valid range.
             TypeError: If data is not a list.
@@ -31,7 +35,11 @@ class Binomial:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
+            
+            # Calculate p first from data (average successes per trial)
             p_estimate = sum(data) / len(data) / n  # Estimating p from data
+            
+            # Use p to calculate n (round to nearest integer)
             n_estimate = round(sum(data) / p_estimate)  # Estimating n
             self.n = n_estimate
             self.p = p_estimate
