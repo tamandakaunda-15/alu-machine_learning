@@ -53,6 +53,21 @@ class Poisson:
                 break
         return result
 
+    def pmf(self, k):
+        """Calculates the value of the PMF for a given number of “successes”."""
+        # If k is not an integer, convert it to an integer
+        if not isinstance(k, int):
+            k = int(k)
+        
+        # If k is negative, return 0 (Poisson distribution is for non-negative integers)
+        if k < 0:
+            return 0
+        
+        # Calculate the PMF using the formula for Poisson distribution
+        pmf_value = (self.lambtha ** k) * self.exp(-self.lambtha) / self.factorial(k)
+        
+        return pmf_value
+
     def cdf(self, k):
         """Calculates the value of the CDF for a given number of “successes”."""
         # If k is not an integer, convert it to an integer
