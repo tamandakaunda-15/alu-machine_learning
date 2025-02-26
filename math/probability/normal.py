@@ -34,8 +34,8 @@ class Normal:
                   distribution.
             mean (float, optional): The mean of the distribution
                  (default is 0).
-            stddev (float, optional): The standard deviation of the distribution
-                                      (default is 1).
+            stddev (float, optional): The standard deviation of the
+                               distribution (default is 1).
 
         Raises:
             ValueError: If stddev is less than or equal to 0.
