@@ -3,7 +3,8 @@
 """
 This module contains the Binomial class, which represents a
 binomial distribution. It can estimate parameters from data and
-compute the probability mass function (PMF).
+compute the probability mass function (PMF) and cumulative
+distribution function (CDF).
 """
 
 
@@ -95,3 +96,24 @@ class Binomial:
 
         pmf_value = comb * (self.p ** k) * ((1 - self.p) ** (self.n - k))
         return pmf_value
+
+    def cdf(self, k):
+        """
+        Computes the cumulative distribution function (CDF) for k
+        successes.
+
+        Args:
+            k (int): Number of successes.
+
+        Returns:
+            float: CDF value for k.
+        """
+        k = int(k)
+
+        if k < 0:
+            return 0
+        if k > self.n:
+            return 1
+
+        cdf_value = sum(self.pmf(i) for i in range(k + 1))
+        return cdf_value
