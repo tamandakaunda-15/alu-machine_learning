@@ -4,8 +4,6 @@ This module defines the Binomial class for working with binomial distributions.
 The class allows you to estimate parameters from data or use predefined parameters.
 """
 
-import numpy as np
-
 class Binomial:
     """
     Binomial distribution class.
@@ -41,8 +39,9 @@ class Binomial:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             
-            p = np.mean(data) / n
-            n = round(np.mean(data))
+            # Calculate p as the average of data, assuming data represents successes
+            p = sum(data) / len(data) / n  # Average success rate (mean of data divided by n)
+            n = round(sum(data) / len(data))  # Use the rounded mean as n
         else:
             if n <= 0:
                 raise ValueError("n must be a positive value")
