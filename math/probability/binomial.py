@@ -41,10 +41,13 @@ class Binomial:
                 raise ValueError("data must contain multiple values")
 
             # Estimate p first (average successes per trial)
-            p_estimate = sum(data) / (len(data) * n)
+            p_estimate = sum(data) / (len(data) * n) 
+           # This is the correct way to calculate p
 
-            # Use the estimated p to calculate n (rounded to nearest integer)
-            n_estimate = round(sum(data) / p_estimate)
+           # Use the estimated p to calculate n (rounded to nearest integer)
+           n_estimate = round(sum(data) / p_estimate) 
+           # This ensures n is a rounded integer based on the estimated p
+
             self.n = n_estimate
             self.p = p_estimate
         else:
