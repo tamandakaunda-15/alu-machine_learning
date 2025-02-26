@@ -66,7 +66,8 @@ class Poisson:
         # Calculate the PMF using the formula for Poisson distribution
         pmf_value = (self.lambtha ** k) * self.exp(-self.lambtha) / self.factorial(k)
         
-        return pmf_value
+        # Round result to a precision of 10 decimal places
+        return round(pmf_value, 10)
 
     def cdf(self, k):
         """Calculates the value of the CDF for a given number of “successes”."""
@@ -83,4 +84,5 @@ class Poisson:
         for i in range(k + 1):
             cdf_value += (self.lambtha ** i) * self.exp(-self.lambtha) / self.factorial(i)
         
-        return cdf_value
+        # Round result to a precision of 10 decimal places
+        return round(cdf_value, 10)
