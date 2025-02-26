@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 class Normal:
     """
     A class that represents a normal distribution.
@@ -31,9 +32,12 @@ class Normal:
         the data. Otherwise, uses the given mean and standard deviation.
 
         Args:
-            data (list, optional): A list of data points to estimate the distribution.
-            mean (float, optional): The mean of the distribution (default is 0).
-            stddev (float, optional): The standard deviation of the distribution (default is 1).
+            data (list, optional): A list of data points to estimate the
+ distribution.
+            mean (float, optional): The mean of the distribution
+ (default is 0).
+            stddev (float, optional): The standard deviation of
+ the distribution (default is 1).
 
         Raises:
             ValueError: If stddev is less than or equal to 0.
