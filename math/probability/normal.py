@@ -7,6 +7,7 @@ The Normal class allows the calculation of the mean and standard deviation
 of a set of data or the use of a specified mean and standard deviation.
 """
 
+
 class Normal:
     """
     A class that represents a normal distribution.
@@ -30,8 +31,9 @@ class Normal:
 
         Args:
             data (list, optional): A list of data points to estimate the
-                                    distribution.
-            mean (float, optional): The mean of the distribution (default is 0).
+                  distribution.
+            mean (float, optional): The mean of the distribution
+ (default is 0).
             stddev (float, optional): The standard deviation of the distribution
                                       (default is 1).
 
