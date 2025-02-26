@@ -53,14 +53,9 @@ class Binomial:
                 raise ValueError("data must contain multiple values")
 
             # Calculate p from data
-            p = sum(data) / (len(data) * n)
-            n = round(len(data) / p)  # Round n based on p
+            successes = sum(data)
+            self.n = len(data)  # Number of trials
+            self.p = successes / self.n  # p is the proportion of successes
 
-            # Recalculate p to ensure precision
-            p = sum(data) / (len(data) * n)
-
-            if not (0 < p < 1):
+            if not (0 < self.p < 1):
                 raise ValueError("p must be greater than 0 and less than 1")
-
-            self.n = n
-            self.p = p
