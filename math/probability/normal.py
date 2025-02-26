@@ -33,7 +33,7 @@ class Normal:
             data (list, optional): A list of data points to estimate the
                   distribution.
             mean (float, optional): The mean of the distribution
- (default is 0).
+                 (default is 0).
             stddev (float, optional): The standard deviation of the distribution
                                       (default is 1).
 
