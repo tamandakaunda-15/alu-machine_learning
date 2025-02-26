@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 """
-This module contains the Binomial class, which represents a 
-binomial distribution. It can estimate parameters from data and 
+This module contains the Binomial class, which represents a
+binomial distribution. It can estimate parameters from data and
 compute the probability mass function (PMF).
 """
+
 
 class Binomial:
     """
@@ -16,11 +17,11 @@ class Binomial:
         Initializes a Binomial instance.
 
         Args:
-            data (list, optional): List of data to estimate the 
+            data (list, optional): List of data to estimate the
                                    distribution. Defaults to None.
-            n (int, optional): Number of Bernoulli trials. 
+            n (int, optional): Number of Bernoulli trials.
                                Defaults to 1.
-            p (float, optional): Probability of success. 
+            p (float, optional): Probability of success.
                                  Defaults to 0.5.
 
         Raises:
@@ -32,8 +33,9 @@ class Binomial:
             if n <= 0:
                 raise ValueError("n must be a positive value")
             if not (0 < p < 1):
-                raise ValueError("p must be greater than 0 and "
-                                 "less than 1")
+                raise ValueError(
+                    "p must be greater than 0 and less than 1"
+                )
             self.n = n
             self.p = p
         else:
@@ -46,8 +48,9 @@ class Binomial:
             n_est = round(len(data) / p_est)
 
             if not (0 < p_est < 1):
-                raise ValueError("p must be greater than 0 and "
-                                 "less than 1")
+                raise ValueError(
+                    "p must be greater than 0 and less than 1"
+                )
 
             self.p = p_est
             self.n = n_est
@@ -71,7 +74,7 @@ class Binomial:
 
     def pmf(self, k):
         """
-        Computes the probability mass function (PMF) for k 
+        Computes the probability mass function (PMF) for k
         successes.
 
         Args:
@@ -80,14 +83,15 @@ class Binomial:
         Returns:
             float: PMF value for k.
         """
-        k = int(k)  # Convert k to an integer
+        k = int(k)
 
         if k < 0 or k > self.n:
             return 0
 
-        comb = (self.factorial(self.n) // 
-                (self.factorial(k) * self.factorial(self.n - k)))
+        comb = (
+            self.factorial(self.n)
+            // (self.factorial(k) * self.factorial(self.n - k))
+        )
 
-        pmf_value = comb * (self.p ** k) * ((1 - self.p) ** 
-                                            (self.n - k))
+        pmf_value = comb * (self.p ** k) * ((1 - self.p) ** (self.n - k))
         return pmf_value
