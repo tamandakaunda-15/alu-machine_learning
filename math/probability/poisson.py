@@ -2,16 +2,18 @@
 
 """Module for Poisson distribution."""
 
+
 class Poisson:
     """Represents a Poisson distribution."""
-    
-    def __init__(self, data=None, lambtha=1.):
+
+    def __init__(self, data=None, lambtha=1.0):
         """Initializes the Poisson distribution.
-        
+
         Args:
             data (list, optional): List of data points to estimate lambtha.
-            lambtha (float, optional): Expected number of occurrences. Defaults to 1.
-        
+            lambtha (float, optional): Expected number of occurrences. 
+                Defaults to 1.
+
         Raises:
             ValueError: If lambtha is not a positive value.
             TypeError: If data is not a list.
