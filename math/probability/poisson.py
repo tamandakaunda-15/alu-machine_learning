@@ -59,20 +59,13 @@ class Poisson:
         if k < 0:
             return 0
         pmf_value = (self.lambtha ** k) * self.exp(-self.lambtha) / self.factorial(k)
-        return round(pmf_value, 10)
+        return float("{:.10f}".format(pmf_value))
 
     def cdf(self, k):
-        """Calculates the value of the CDF for a given number of 'successes'.
-
-        Args:
-            k (int): Number of occurrences.
-
-        Returns:
-            float: The cumulative probability up to k.
-        """
+        """Calculates the value of the CDF for a given number of 'successes'."""
         if not isinstance(k, int):
             k = int(k)
         if k < 0:
             return 0
         cdf_value = sum(self.pmf(i) for i in range(k + 1))
-        return round(cdf_value, 10)
+        return float("{:.10f}".format(cdf_value))
