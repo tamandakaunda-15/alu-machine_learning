@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+"""
+This module defines a class Normal that represents a normal distribution.
+
+The Normal class allows the calculation of the mean and standard deviation
+of a set of data or the use of a specified mean and standard deviation.
+"""
 
 class Normal:
     """
