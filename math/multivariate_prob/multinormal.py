@@ -57,7 +57,7 @@ class MultiNormal:
         
         d, _ = self.mean.shape
         if x.shape != (d, 1):
-            raise ValueError(f"x must have the shape ({d}, 1)")
+            raise ValueError("x must have the shape ({}, 1)".format(d))
 
         # Calculate the PDF
         diff = x - self.mean
