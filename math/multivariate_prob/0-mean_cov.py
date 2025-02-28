@@ -33,7 +33,11 @@ def mean_cov(X):
     # Calculate the mean of the dataset
     mean = np.mean(X, axis=0).reshape(1, -1)
     
-    # Calculate the covariance matrix of the dataset
-    cov = np.cov(X, rowvar=False)
+    # Calculate the covariance matrix manually
+    # Subtract the mean from each data point
+    X_centered = X - mean
+    
+    # Calculate the covariance matrix: (1/(n-1)) * (X_centered.T @ X_centered)
+    cov = np.dot(X_centered.T, X_centered) / (n - 1)
     
     return mean, cov
