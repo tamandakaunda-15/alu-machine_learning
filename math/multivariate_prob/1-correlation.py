@@ -7,33 +7,32 @@ This module contains a function to calculate the correlation matrix from a covar
 
 def correlation(C):
     """
-    Calculates the correlation matrix from the covariance matrix.
+    Calculates the correlation matrix from a covariance matrix.
     
     Args:
-    C (numpy.ndarray): A 2D numpy array of shape (d, d) representing the covariance matrix.
-
+    C (numpy.ndarray): A 2D numpy array of shape (d, d) containing a covariance matrix.
+    
     Returns:
-    numpy.ndarray: A 2D numpy array of shape (d, d) representing the correlation matrix.
+    numpy.ndarray: A 2D numpy array of shape (d, d) containing the correlation matrix.
     
     Raises:
-    TypeError: If C is not a numpy ndarray.
-    ValueError: If C is not a 2D square matrix.
+    TypeError: If C is not a numpy.ndarray.
+    ValueError: If C does not have shape (d, d) (i.e., it's not a square matrix).
     """
     
     # Check if C is a numpy ndarray
     if not isinstance(C, np.ndarray):
         raise TypeError("C must be a numpy.ndarray")
     
-    # Check if C is a 2D square matrix
-    d, n = C.shape
-    if d != n:
+    # Check if C is a square matrix
+    if C.shape[0] != C.shape[1]:
         raise ValueError("C must be a 2D square matrix")
     
     # Calculate the correlation matrix
-    # Compute the standard deviations of the variables (square roots of the diagonal elements of C)
-    std_devs = np.sqrt(np.diagonal(C))
+    # First, compute the standard deviations (square roots of the variances)
+    stddev = np.sqrt(np.diagonal(C))
     
-    # Calculate the correlation matrix by normalizing the covariance matrix
-    corr_matrix = C / (std_devs[:, None] * std_devs)
+    # Use broadcasting to calculate the correlation matrix
+    corr = C / (stddev[:, None] * stddev)
     
-    return corr_matrix
+    return corr
