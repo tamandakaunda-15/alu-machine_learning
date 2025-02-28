@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import numpy as np
 
-
 class MultiNormal:
     """
     A class representing a Multivariate Normal distribution.
@@ -11,16 +10,14 @@ class MultiNormal:
         cov (numpy.ndarray): The covariance matrix of the data with shape (d, d).
 
     Methods:
-        __init__(self, data): Initializes the MultiNormal instance using
- the provided data.
+        __init__(self, data): Initializes the MultiNormal instance using the provided data.
     """
     def __init__(self, data):
         """
         Initializes the MultiNormal instance.
 
         Args:
-            data (numpy.ndarray): A 2D array of shape (d, n), where d is the
- number of dimensions 
+            data (numpy.ndarray): A 2D array of shape (d, n), where d is the number of dimensions 
                                    and n is the number of data points.
 
         Raises:
@@ -39,6 +36,5 @@ class MultiNormal:
         self.mean = np.mean(data, axis=1).reshape(d, 1)
         
         # Compute the covariance matrix (d, d) without using numpy.cov
-        data_centered = data - self.mean  # Subtract the mean from the
- data points
+        data_centered = data - self.mean  # Subtract the mean from the data points
         self.cov = np.dot(data_centered, data_centered.T) / (n - 1)
