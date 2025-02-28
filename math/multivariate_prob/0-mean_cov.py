@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import numpy as np
 
+
 """
 This module contains a function to calculate the mean and covariance
  of a dataset.
