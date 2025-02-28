@@ -2,7 +2,7 @@
 import numpy as np
 
 """
-Module to compute the mean and covariance of a dataset.
+This module contains a function to calculate the mean and covariance of a dataset.
 """
 
 def mean_cov(X):
