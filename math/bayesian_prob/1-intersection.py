@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
+"""
+This module contains the function `intersection` that calculates the intersection 
+of obtaining data with hypothetical probabilities, considering prior beliefs.
+
+It raises various exceptions for invalid inputs and returns a 1D numpy array of 
+the intersection results.
+"""
+
 import numpy as np
 from scipy.special import comb
+
 
 def intersection(x, n, P, Pr):
     """
