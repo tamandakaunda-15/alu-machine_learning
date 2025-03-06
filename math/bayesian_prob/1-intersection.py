@@ -23,7 +23,8 @@ def intersection(x, n, P, Pr):
     - Pr (numpy.ndarray): 1D array of prior probabilities.
 
     Returns:
-    - numpy.ndarray: Intersection of obtaining the data for each probability in P.
+    - numpy.ndarray: Intersection of obtaining the data for each probability 
+      in P.
 
     Raises:
     - ValueError: If n is not a positive integer.
