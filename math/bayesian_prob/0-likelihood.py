@@ -19,7 +19,8 @@ def likelihood(x, n, P):
     - P (numpy.ndarray): 1D array of hypothetical probabilities.
 
     Returns:
-    - numpy.ndarray: Likelihood of obtaining the data for each probability in P.
+    - numpy.ndarray: Likelihood of obtaining the data for each
+      probability in P.
 
     Raises:
     - ValueError: If n is not a positive integer.
