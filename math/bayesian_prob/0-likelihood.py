@@ -3,22 +3,24 @@
 Calculates the likelihood of obtaining data given various hypothetical
 probabilities of developing severe side effects.
 """
+
 import numpy as np
 from scipy.special import comb
+
 
 def likelihood(x, n, P):
     """
     Calculates the likelihood of obtaining data given various hypothetical
     probabilities of developing severe side effects.
-    
+
     Parameters:
     - x (int): Number of patients that develop severe side effects.
     - n (int): Total number of patients observed.
     - P (numpy.ndarray): 1D array of hypothetical probabilities.
-    
+
     Returns:
     - numpy.ndarray: Likelihood of obtaining the data for each probability in P.
-    
+
     Raises:
     - ValueError: If n is not a positive integer.
     - ValueError: If x is not an integer >= 0.
@@ -36,8 +38,8 @@ def likelihood(x, n, P):
         raise TypeError("P must be a 1D numpy.ndarray")
     if np.any((P < 0) | (P > 1)):
         raise ValueError("All values in P must be in the range [0, 1]")
-    
+
     binomial_coeff = comb(n, x)
     likelihoods = binomial_coeff * (P ** x) * ((1 - P) ** (n - x))
-    
+
     return likelihoods
