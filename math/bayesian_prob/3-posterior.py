@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import numpy as np
 from scipy.special import comb
-from 2-marginal import marginal  # Reusing the marginal function
+from 2-marginal import marginal  # Reuse the marginal function
 
 def posterior(x, n, P, Pr):
     """
@@ -26,6 +26,7 @@ def posterior(x, n, P, Pr):
     - ValueError: If any value in P or Pr is not in the range [0, 1].
     - ValueError: If Pr does not sum to 1.
     """
+    # Check input validity
     if not isinstance(n, int) or n <= 0:
         raise ValueError("n must be a positive integer")
     if not isinstance(x, int) or x < 0:
@@ -52,7 +53,8 @@ def posterior(x, n, P, Pr):
     binomial_coeff = comb(n, x)
     likelihoods = binomial_coeff * (P ** x) * ((1 - P) ** (n - x))
 
-    # Calculate the posterior by multiplying the likelihood with prior and normalizing by the marginal probability
+    # Calculate the posterior by multiplying the likelihood with prior
+      and normalizing by the marginal probability
     posterior_prob = (likelihoods * Pr) / marginal_prob
 
     return posterior_prob
