@@ -1,91 +1,80 @@
 #!/usr/bin/env python3
+
+
+"""
+This module performs the convolution operation on grayscale images, 
+specifically using 'valid' padding and iterating over the image with a
+given stride.It includes functions for performing the convolution,
+ max pooling, and average pooling.
+"""
+
 import numpy as np
+from math import ceil, floor
 
 
 def convolve_grayscale_valid(images, kernel):
     """
-    Performs a valid convolution on grayscale images using a kernel.
-    
-    Parameters:
-    images (numpy.ndarray): A 3D numpy array of shape (m, h, w), where m is the number of images, h is the height, and w is the width.
-    kernel (numpy.ndarray): A 2D numpy array representing the convolution kernel (filter).
-    
+    Performs a convolution on a grayscale image using 'valid' padding.
+
+    Args:
+        images (numpy.ndarray): A numpy array containing multiple
+                                grayscale images.
+        kernel (numpy.ndarray): The kernel/filter used for the convolution.
+
     Returns:
-    numpy.ndarray: A 3D numpy array of shape (m, h-kh+1, w-kw+1), where kh and kw are the height and width of the kernel.
+        numpy.ndarray: A numpy array containing the result of the convolution.
     """
+
     m, h, w = images.shape
     kh, kw = kernel.shape
-    output_height = h - kh + 1
-    output_width = w - kw + 1
 
-    output = np.zeros((m, output_height, output_width))
+    # Calculate the dimensions of the output image
+    new_h = h - kh + 1
+    new_w = w - kw + 1
 
-    for i in range(m):
-        for j in range(output_height):
-            for k in range(output_width):
-                # Extract region of the image matching the kernel size
-                region = images[i, j:j+kh, k:k+kw]
-                # Perform element-wise multiplication and sum the result
-                output[i, j, k] = np.sum(region * kernel)
+    # Initialize the output array
+    output = np.zeros((m, new_h, new_w))
 
+    for i in range(new_h):
+        for j in range(new_w):
+            output[:, i, j] = np.sum(
+                images[:, i:i+kh, j:j+kw] * kernel, axis=(1, 2)
+            )
+    
     return output
 
 
-def pool_grayscale_max(images, pool_size, stride):
+def pool(images, kernel_size, stride, mode='max'):
     """
-    Performs max pooling on grayscale images.
-    
-    Parameters:
-    images (numpy.ndarray): A 3D numpy array of shape (m, h, w), where m is the number of images, h is the height, and w is the width.
-    pool_size (int): The size of the pooling window (usually 2 for 2x2 pooling).
-    stride (int): The stride of the pooling operation.
-    
+    Applies max or average pooling to an image or a set of images.
+
+    Args:
+        images (numpy.ndarray): A numpy array containing grayscale images.
+        kernel_size (tuple): The size of the pooling kernel (height, width).
+        stride (int): The stride for pooling.
+        mode (str): The pooling mode - 'max' or 'average'.
+
     Returns:
-    numpy.ndarray: A 3D numpy array containing the pooled images.
+        numpy.ndarray: A numpy array containing the pooled images.
     """
+
     m, h, w = images.shape
-    ph, pw = pool_size, pool_size  # Pooling window size
-    output_height = (h - ph) // stride + 1
-    output_width = (w - pw) // stride + 1
+    kh, kw = kernel_size
 
-    output = np.zeros((m, output_height, output_width))
+    # Calculate output dimensions
+    new_h = (h - kh) // stride + 1
+    new_w = (w - kw) // stride + 1
 
-    for i in range(m):
-        for j in range(output_height):
-            for k in range(output_width):
-                # Define the region of the image for pooling
-                region = images[i, j*stride:j*stride+ph, k*stride:k*stride+pw]
-                # Apply max pooling (take the maximum value in the region)
-                output[i, j, k] = np.max(region)
+    # Initialize the output array
+    output = np.zeros((m, new_h, new_w))
 
-    return output
-
-
-def pool_grayscale_avg(images, pool_size, stride):
-    """
-    Performs average pooling on grayscale images.
-    
-    Parameters:
-    images (numpy.ndarray): A 3D numpy array of shape (m, h, w), where m is the number of images, h is the height, and w is the width.
-    pool_size (int): The size of the pooling window (usually 2 for 2x2 pooling).
-    stride (int): The stride of the pooling operation.
-    
-    Returns:
-    numpy.ndarray: A 3D numpy array containing the pooled images.
-    """
-    m, h, w = images.shape
-    ph, pw = pool_size, pool_size  # Pooling window size
-    output_height = (h - ph) // stride + 1
-    output_width = (w - pw) // stride + 1
-
-    output = np.zeros((m, output_height, output_width))
-
-    for i in range(m):
-        for j in range(output_height):
-            for k in range(output_width):
-                # Define the region of the image for pooling
-                region = images[i, j*stride:j*stride+ph, k*stride:k*stride+pw]
-                # Apply average pooling (compute the mean value of the region)
-                output[i, j, k] = np.mean(region)
+    for i in range(new_h):
+        for j in range(new_w):
+            # Get the current slice of the image
+            img_slice = images[:, i*stride:i*stride+kh, j*stride:j*stride+kw]
+            if mode == 'max':
+                output[:, i, j] = np.max(img_slice, axis=(1, 2))
+            elif mode == 'average':
+                output[:, i, j] = np.mean(img_slice, axis=(1, 2))
 
     return output
