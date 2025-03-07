@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import numpy as np
 
+
 def convolve_grayscale_valid(images, kernel):
     """
     Performs a valid convolution on grayscale images using a kernel.
@@ -28,6 +29,7 @@ def convolve_grayscale_valid(images, kernel):
                 output[i, j, k] = np.sum(region * kernel)
 
     return output
+
 
 def pool_grayscale_max(images, pool_size, stride):
     """
@@ -57,6 +59,7 @@ def pool_grayscale_max(images, pool_size, stride):
                 output[i, j, k] = np.max(region)
 
     return output
+
 
 def pool_grayscale_avg(images, pool_size, stride):
     """
