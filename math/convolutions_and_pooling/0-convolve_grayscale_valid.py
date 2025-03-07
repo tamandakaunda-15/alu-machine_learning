@@ -1,80 +1,79 @@
 #!/usr/bin/env python3
-
-
 """
-This module performs the convolution operation on grayscale images, 
-specifically using 'valid' padding and iterating over the image with a
-given stride.It includes functions for performing the convolution,
- max pooling, and average pooling.
+This module performs the convolution operation on grayscale 
+images, specifically using 'valid' padding and iterating over 
+the image with a given stride.
 """
-
-import numpy as np
-from math import ceil, floor
-
 
 def convolve_grayscale_valid(images, kernel):
     """
     Performs a convolution on a grayscale image using 'valid' padding.
 
     Args:
-        images (numpy.ndarray): A numpy array containing multiple
-                                grayscale images.
-        kernel (numpy.ndarray): The kernel/filter used for the convolution.
+        images (list of lists of lists): Grayscale images.
+        kernel (list of lists): The kernel/filter used for convolution.
 
     Returns:
-        numpy.ndarray: A numpy array containing the result of the convolution.
+        list of lists of lists: Result of the convolution.
     """
 
-    m, h, w = images.shape
-    kh, kw = kernel.shape
+    m, h, w = len(images), len(images[0]), len(images[0][0])
+    kh, kw = len(kernel), len(kernel[0])
 
-    # Calculate the dimensions of the output image
+    # Calculate output image dimensions
     new_h = h - kh + 1
     new_w = w - kw + 1
 
-    # Initialize the output array
-    output = np.zeros((m, new_h, new_w))
+    # Initialize output array
+    output = [[[0 for _ in range(new_w)] for _ in range(new_h)] 
+              for _ in range(m)]
 
     for i in range(new_h):
         for j in range(new_w):
-            output[:, i, j] = np.sum(
-                images[:, i:i+kh, j:j+kw] * kernel, axis=(1, 2)
-            )
+            for k in range(m):
+                output[k][i][j] = sum(
+                    images[k][i + x][j + y] * kernel[x][y] 
+                    for x in range(kh) for y in range(kw)
+                )
     
     return output
 
 
 def pool(images, kernel_size, stride, mode='max'):
     """
-    Applies max or average pooling to an image or a set of images.
+    Applies max or average pooling to images.
 
     Args:
-        images (numpy.ndarray): A numpy array containing grayscale images.
-        kernel_size (tuple): The size of the pooling kernel (height, width).
+        images (list of lists of lists): Grayscale images.
+        kernel_size (tuple): Pooling kernel size (height, width).
         stride (int): The stride for pooling.
-        mode (str): The pooling mode - 'max' or 'average'.
+        mode (str): 'max' or 'average' pooling mode.
 
     Returns:
-        numpy.ndarray: A numpy array containing the pooled images.
+        list of lists of lists: Pooled images.
     """
 
-    m, h, w = images.shape
+    m, h, w = len(images), len(images[0]), len(images[0][0])
     kh, kw = kernel_size
 
     # Calculate output dimensions
     new_h = (h - kh) // stride + 1
     new_w = (w - kw) // stride + 1
 
-    # Initialize the output array
-    output = np.zeros((m, new_h, new_w))
+    # Initialize output array
+    output = [[[0 for _ in range(new_w)] for _ in range(new_h)] 
+              for _ in range(m)]
 
     for i in range(new_h):
         for j in range(new_w):
-            # Get the current slice of the image
-            img_slice = images[:, i*stride:i*stride+kh, j*stride:j*stride+kw]
-            if mode == 'max':
-                output[:, i, j] = np.max(img_slice, axis=(1, 2))
-            elif mode == 'average':
-                output[:, i, j] = np.mean(img_slice, axis=(1, 2))
+            for k in range(m):
+                img_slice = [row[j*stride:j*stride+kw] 
+                             for row in images[k][i*stride:i*stride+kh]]
+                if mode == 'max':
+                    output[k][i][j] = max(max(row) for row in img_slice)
+                elif mode == 'average':
+                    output[k][i][j] = sum(sum(row) for row in img_slice) / (
+                        kh * kw
+                    )
 
     return output
