@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import numpy as np
 
+
 """
 This module implements a pooling operation on images with channels. It supports 
 both max pooling and average pooling. The pooling operation works on multiple 
@@ -34,7 +35,7 @@ def pool(images, kernel_shape, stride, mode='max'):
     output = np.zeros((m, out_h, out_w, c))
 
     # Perform pooling
-    for i in range(out_h):
+    for i in range(out_h): 
         for j in range(out_w):
             # Extract the current region of the image
             region = images[:, i * sh:i * sh + kh, j * sw:j * sw + kw, :]
