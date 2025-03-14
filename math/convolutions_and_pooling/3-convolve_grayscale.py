@@ -32,10 +32,13 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     h_new = (h + 2 * ph - kh) // sh + 1
     w_new = (w + 2 * pw - kw) // sw + 1
 
-    # Pad images
-    images_padded = np.pad(
-        images, ((0, 0), (ph, ph), (pw, pw)), mode='constant'
-    )
+    # Apply padding only if necessary
+    if ph > 0 or pw > 0:
+        images_padded = np.pad(
+            images, ((0, 0), (ph, ph), (pw, pw)), mode='constant'
+        )
+    else:
+        images_padded = images  # No padding for 'valid'
 
     # Initialize output
     convolved = np.zeros((m, h_new, w_new))
