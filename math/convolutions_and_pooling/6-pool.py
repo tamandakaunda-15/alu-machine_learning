@@ -2,8 +2,8 @@
 import numpy as np
 
 """
-Module that performs pooling on images with channels. Supports max pooling 
-and average pooling. The pooling operation is applied using a sliding window 
+Module that performs pooling on images with channels. Supports max pooling
+and average pooling. The pooling operation is applied using a sliding window
 defined by the kernel shape and stride.
 """
 
