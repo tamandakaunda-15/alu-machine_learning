@@ -10,11 +10,11 @@ def convolve_grayscale_valid(images, kernel):
     Performs a valid convolution on grayscale images.
 
     Args:
-        images (numpy.ndarray): Shape (m, h, w) containing multiple grayscale images.
+        images (numpy.ndarray): Shape (m, h, w) containing multiple grayscale.
             m: Number of images.
             h: Height in pixels of the images.
             w: Width in pixels of the images.
-        kernel (numpy.ndarray): Shape (kh, kw) containing the kernel for the convolution.
+        kernel (numpy.ndarray): Shape (kh, kw) containing  convolution kernel.
             kh: Height of the kernel.
             kw: Width of the kernel.
 
