@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 import numpy as np
 
+"""
+Module that performs pooling on images with channels. Supports max pooling 
+and average pooling. The pooling operation is applied using a sliding window 
+defined by the kernel shape and stride.
+"""
+
 def pool(images, kernel_shape, stride, mode='max'):
     """
     Perform pooling on images with channels.
