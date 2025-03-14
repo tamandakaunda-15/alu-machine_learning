@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Performs a same convolution on grayscale images.
+Performs a valid convolution on grayscale images.
 """
+
 import numpy as np
 
-def convolve_grayscale_same(images, kernel):
+
+def convolve_grayscale_valid(images, kernel):
     """
-    Performs a same convolution on grayscale images.
+    Performs a valid convolution on grayscale images.
 
     Args:
         images (numpy.ndarray): Shape (m, h, w) containing multiple grayscale images.
@@ -18,21 +20,19 @@ def convolve_grayscale_same(images, kernel):
             kw: Width of the kernel.
 
     Returns:
-        numpy.ndarray: Convolved images with the same shape as the input images (m, h, w).
+        numpy.ndarray: Convolved images with shape (m, new_h, new_w).
     """
     m, h, w = images.shape
     kh, kw = kernel.shape
-    pad_h = kh // 2
-    pad_w = kw // 2
-    
-    # Pad images with zeros to maintain the original size after convolution
-    padded_images = np.pad(images, ((0, 0), (pad_h, pad_h), (pad_w, pad_w)), mode='constant')
-    convolved = np.zeros((m, h, w))
-    
-    for i in range(h):
-        for j in range(w):
+    new_h = h - kh + 1
+    new_w = w - kw + 1
+    convolved = np.zeros((m, new_h, new_w))
+
+    for i in range(new_h):
+        for j in range(new_w):
             convolved[:, i, j] = np.sum(
-                padded_images[:, i:i+kh, j:j+kw] * kernel, axis=(1, 2)
+                images[:, i:i+kh, j:j+kw] * kernel,
+                axis=(1, 2)
             )
-    
+
     return convolved
