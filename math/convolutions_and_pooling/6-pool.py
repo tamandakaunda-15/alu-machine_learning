@@ -3,13 +3,18 @@ import numpy as np
 
 
 """
-This module implements a pooling operation on images with channels. It supports 
-both max pooling and average pooling. The pooling operation works on multiple 
-images and uses a kernel and stride to control the pooling process. 
+This module provides an implementation of a pooling operation for image processing. 
+It supports both max pooling and average pooling. Pooling is commonly used in 
+convolutional neural networks (CNNs) to reduce the spatial dimensions of the input 
+while preserving important information.
 
-The `pool` function takes as input the images, kernel shape, stride, and the 
-mode (either 'max' or 'avg') and performs the respective pooling operation.
-It returns the pooled images as a numpy.ndarray.
+The `pool` function allows for pooling across multiple images and channels, using 
+a specified kernel size and stride. It can perform either max pooling or average 
+pooling depending on the mode provided. The result is a set of pooled images, 
+which are returned as a numpy.ndarray.
+
+Functions:
+    pool(images, kernel_shape, stride, mode='max'): Performs pooling on input images.
 """
 
 def pool(images, kernel_shape, stride, mode='max'):
