@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NeuralNetwork with one hidden layer performing binary 
+"""NeuralNetwork with one hidden layer performing binary
 classification (privatized)"""
 import numpy as np
 
