@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Neuron module that defines a single neuron for binary classification (private attributes)"""
+"""Neuron module that defines a single neuron for binary
+   classification (private attributes)"""
 
 import numpy as np
 
