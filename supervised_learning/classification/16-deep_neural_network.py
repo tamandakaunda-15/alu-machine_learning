@@ -10,9 +10,15 @@ class DeepNeuralNetwork:
         """
         Initialize a deep neural network
 
-        Parameters:
-        nx (int): number of input features
-        layers (list): list of number of nodes in each layer
+        Args:
+            nx (int): number of input features
+            layers (list): list of nodes in each layer
+
+        Raises:
+            TypeError: if nx is not int
+            ValueError: if nx < 1
+            TypeError: if layers is not list or empty
+            TypeError: if any layer size is not a positive integer
         """
         # Validate nx
         if not isinstance(nx, int):
@@ -23,18 +29,17 @@ class DeepNeuralNetwork:
         # Validate layers
         if not isinstance(layers, list) or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
+
         if not all(isinstance(n, int) and n > 0 for n in layers):
             raise TypeError("layers must be a list of positive integers")
 
-        self.L = len(layers)
-        self.cache = {}
-        self.weights = {}
+        self.L = len(layers)  # number of layers
+        self.cache = {}  # cache for intermediary values
+        self.weights = {}  # weights and biases
 
-        # Initialize weights and biases using He et al. method
+        # Initialize weights and biases using He initialization
         for l in range(1, self.L + 1):
             layer_input = nx if l == 1 else layers[l - 2]
-            self.weights[f"W{l}"] = (
-                np.random.randn(layers[l - 1], layer_input) *
-                np.sqrt(2 / layer_input)
-            )
-            self.weights[f"b{l}"] = np.zeros((layers[l - 1], 1))
+            self.weights["W{}".format(l)] = (np.random.randn(layers[l - 1], layer_input) *
+                                            np.sqrt(2 / layer_input))
+            self.weights["b{}".format(l)] = np.zeros((layers[l - 1], 1))
