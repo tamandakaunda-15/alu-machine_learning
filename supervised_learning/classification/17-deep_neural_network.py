@@ -1,58 +1,90 @@
 #!/usr/bin/env python3
-"""Defines a deep neural network performing binary classification"""
+"""
+defines DeepNeuralNetwork class that defines
+a deep neural network performing binary classification
+"""
+
+
 import numpy as np
 
 
 class DeepNeuralNetwork:
     """
-    Defines a deep neural network performing binary classification
+    class that represents a deep neural network
+    performing binary classification
+
+    class constructor:
+        def __init__(self, nx, layers)
+
+    private instance attributes:
+        L: the number of layers in the neural network
+        cache: a dictionary holding all intermediary values of the network
+        weights: a dictionary holding all weights and biases of the network
     """
 
     def __init__(self, nx, layers):
         """
-        Class constructor
+        class constructor
 
-        Parameters:
-        nx (int): number of input features
-        layers (list): list representing the number of nodes in each layer
+        parameters:
+            nx [int]: the number of input features
+                If nx is not an integer, raise a TypeError.
+                If nx is less than 1, raise a ValueError.
+            layers [list]: representing the number of nodes in each layer
+                If layers is not a list, raise TypeError.
+                If elements in layers are not all positive ints,
+                    raise a TypeError.
 
-        Raises:
-        TypeError: if nx is not an integer
-        ValueError: if nx is less than 1
-        TypeError: if layers is not a list of positive integers
+        sets private instance attributes:
+            __L: the number of layers in the neural network,
+                initialized based on layers
+            __cache: a dictionary holding all intermediary values for network,,
+                initialized as an empty dictionary
+            __weights: a dictionary holding all weights/biases of the network,
+                weights initialized using the He et al. method
+                    using the key W{l} where {l} is the hidden layer
+                biases initialized to 0s
+                    using the key b{l} where {1} is the hidden layer
         """
-        if not isinstance(nx, int):
+        if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
-        if not isinstance(layers, list) or len(layers) == 0:
+        if type(layers) is not list or len(layers) < 1:
             raise TypeError("layers must be a list of positive integers")
-        if not all(isinstance(x, int) and x > 0 for x in layers):
-            raise TypeError("layers must be a list of positive integers")
-
+        weights = {}
+        previous = nx
+        for index, layer in enumerate(layers, 1):
+            if type(layer) is not int or layer < 0:
+                raise TypeError("layers must be a list of positive integers")
+            weights["b{}".format(index)] = np.zeros((layer, 1))
+            weights["W{}".format(index)] = (
+                np.random.randn(layer, previous) * np.sqrt(2 / previous))
+            previous = layer
         self.__L = len(layers)
         self.__cache = {}
-        self.__weights = {}
-
-        for l in range(1, self.__L + 1):
-            layer_size = layers[l - 1]
-            prev_size = nx if l == 1 else layers[l - 2]
-            self.__weights[f"W{l}"] = (
-                np.random.randn(layer_size, prev_size) * np.sqrt(2 / prev_size)
-            )
-            self.__weights[f"b{l}"] = np.zeros((layer_size, 1))
+        self.__weights = weights
 
     @property
     def L(self):
-        """Getter for number of layers"""
-        return self.__L
+        """
+        gets the private instance attribute __L
+        __L is the number of layers in the neural network
+        """
+        return (self.__L)
 
     @property
     def cache(self):
-        """Getter for cache dictionary"""
-        return self.__cache
+        """
+        gets the private instance attribute __cache
+        __cache holds all the intermediary values of the network
+        """
+        return (self.__cache)
 
     @property
     def weights(self):
-        """Getter for weights dictionary"""
-        return self.__weights
+        """
+        gets the private instance attribute __weights
+        __weights holds all the wrights and biases of the network
+        """
+        return (self.__weights)
