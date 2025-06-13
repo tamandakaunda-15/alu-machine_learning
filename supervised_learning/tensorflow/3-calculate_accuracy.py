@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Defines a function that calculates the accuracy of a prediction
