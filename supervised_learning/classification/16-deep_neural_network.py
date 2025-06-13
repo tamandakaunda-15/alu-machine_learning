@@ -17,8 +17,8 @@ class DeepNeuralNetwork:
         Raises:
             TypeError: if nx is not int
             ValueError: if nx < 1
-            TypeError: if layers is not list or empty
-            TypeError: if any layer size is not a positive integer
+            TypeError: if layers is not a list or empty
+            TypeError: if any element in layers is not a positive integer
         """
         # Validate nx
         if not isinstance(nx, int):
@@ -29,19 +29,18 @@ class DeepNeuralNetwork:
         # Validate layers
         if not isinstance(layers, list) or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
-
         if not all(isinstance(n, int) and n > 0 for n in layers):
             raise TypeError("layers must be a list of positive integers")
 
-        self.L = len(layers)  # number of layers
-        self.cache = {}  # dictionary to hold intermediary values
-        self.weights = {}  # dictionary to hold weights and biases
+        self.L = len(layers)          # Number of layers in the network
+        self.cache = {}               # To store intermediary values during forward propagation
+        self.weights = {}             # To store weights and biases
 
-        # Initialize weights and biases using He initialization (only one loop)
+        # Initialize weights and biases using He et al. method
         for l in range(1, self.L + 1):
-            nodes_prev = nx if l == 1 else layers[l - 2]
-            nodes_curr = layers[l - 1]
+            layer_size = layers[l - 1]
+            prev_layer_size = nx if l == 1 else layers[l - 2]
 
-            self.weights["W{}".format(l)] = (np.random.randn(nodes_curr, nodes_prev) *
-                                            np.sqrt(2 / nodes_prev))
-            self.weights["b{}".format(l)] = np.zeros((nodes_curr, 1))
+            self.weights[f"W{l}"] = (np.random.randn(layer_size, prev_layer_size) *
+                                     np.sqrt(2 / prev_layer_size))
+            self.weights[f"b{l}"] = np.zeros((layer_size, 1))
