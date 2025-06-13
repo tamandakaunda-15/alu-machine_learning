@@ -1,46 +1,66 @@
 #!/usr/bin/env python3
-"""Defines a deep neural network performing binary classification"""
+"""
+defines DeepNeuralNetwork class that defines
+a deep neural network performing binary classification
+"""
+
+
 import numpy as np
 
 
 class DeepNeuralNetwork:
-    """Deep neural network class for binary classification"""
+    """
+    class that represents a deep neural network
+    performing binary classification
+
+    class constructor:
+        def __init__(self, nx, layers)
+
+    public instance attributes:
+        L: the number of layers in the neural network
+        cache: a dictionary holding all intermediary values of the network
+        weights: a dictionary holding all weights and biases of the network
+    """
 
     def __init__(self, nx, layers):
         """
-        Initialize a deep neural network
+        class constructor
 
-        Args:
-            nx (int): number of input features
-            layers (list): list of nodes in each layer
+        parameters:
+            nx [int]: the number of input features
+                If nx is not an integer, raise a TypeError.
+                If nx is less than 1, raise a ValueError.
+            layers [list]: representing the number of nodes in each layer
+                If layers is not a list, raise TypeError.
+                If elements in layers are not all positive ints,
+                    raise a TypeError.
 
-        Raises:
-            TypeError: if nx is not int
-            ValueError: if nx < 1
-            TypeError: if layers is not a list or empty
-            TypeError: if any element in layers is not a positive integer
+        sets public instance attributes:
+            L: the number of layers in the neural network,
+                initialized based on layers
+            cache: a dictionary holding all intermediary values of the network,
+                initialized as an empty dictionary
+            weights: a dictionary holding all weights & biases of the network,
+                weights initialized using the He et al. method
+                    using the key W{l} where {l} is the hidden layer
+                biases initialized to 0s
+                    using the key b{l} where {1} is the hidden layer
         """
-        # Validate nx
-        if not isinstance(nx, int):
+        if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
-
-        # Validate layers
-        if not isinstance(layers, list) or len(layers) == 0:
+        if type(layers) is not list or len(layers) < 1:
             raise TypeError("layers must be a list of positive integers")
-        if not all(isinstance(n, int) and n > 0 for n in layers):
-            raise TypeError("layers must be a list of positive integers")
-
-        self.L = len(layers)          # Number of layers in the network
-        self.cache = {}               # To store intermediary values during forward propagation
-        self.weights = {}             # To store weights and biases
-
-        # Initialize weights and biases using He et al. method
-        for l in range(1, self.L + 1):
-            layer_size = layers[l - 1]
-            prev_layer_size = nx if l == 1 else layers[l - 2]
-
-            self.weights[f"W{l}"] = (np.random.randn(layer_size, prev_layer_size) *
-                                     np.sqrt(2 / prev_layer_size))
-            self.weights[f"b{l}"] = np.zeros((layer_size, 1))
+        weights = {}
+        previous = nx
+        for index, layer in enumerate(layers, 1):
+            if type(layer) is not int or layer < 0:
+                raise TypeError("layers must be a list of positive integers")
+            weights["b{}".format(index)] = np.zeros((layer, 1))
+            weights["W{}".format(index)] = (
+                np.random.randn(layer, previous) * np.sqrt(2 / previous))
+            previous = layer
+        self.L = len(layers)
+        self.cache = {}
+        self.weights = weights
