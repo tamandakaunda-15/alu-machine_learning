@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""NeuralNetwork with one hidden layer performing binary classification (forward propagation added)"""
+"""NeuralNetwork with one hidden layer performing binary
+ classification (forward propagation added)"""
 import numpy as np
 
 
