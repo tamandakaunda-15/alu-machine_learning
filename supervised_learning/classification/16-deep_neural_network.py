@@ -34,12 +34,14 @@ class DeepNeuralNetwork:
             raise TypeError("layers must be a list of positive integers")
 
         self.L = len(layers)  # number of layers
-        self.cache = {}  # cache for intermediary values
-        self.weights = {}  # weights and biases
+        self.cache = {}  # dictionary to hold intermediary values
+        self.weights = {}  # dictionary to hold weights and biases
 
-        # Initialize weights and biases using He initialization
+        # Initialize weights and biases using He initialization (only one loop)
         for l in range(1, self.L + 1):
-            layer_input = nx if l == 1 else layers[l - 2]
-            self.weights["W{}".format(l)] = (np.random.randn(layers[l - 1], layer_input) *
-                                            np.sqrt(2 / layer_input))
-            self.weights["b{}".format(l)] = np.zeros((layers[l - 1], 1))
+            nodes_prev = nx if l == 1 else layers[l - 2]
+            nodes_curr = layers[l - 1]
+
+            self.weights["W{}".format(l)] = (np.random.randn(nodes_curr, nodes_prev) *
+                                            np.sqrt(2 / nodes_prev))
+            self.weights["b{}".format(l)] = np.zeros((nodes_curr, 1))
