@@ -31,9 +31,10 @@ def availableShips(passengerCount):
 
         data = response.json()
         for ship in data.get('results', []):
-            passengers = ship.get('passengers', '0').replace(',', '').split()[0]
+            passenger_raw = ship.get('passengers', '0')
+            passenger_clean = passenger_raw.replace(',', '').split()[0]
             try:
-                if passengers.isdigit() and int(passengers) >= passengerCount:
+                if passenger_clean.isdigit() and int(passenger_clean) >= passengerCount:
                     matching_ships.append(ship.get('name'))
             except ValueError:
                 continue
