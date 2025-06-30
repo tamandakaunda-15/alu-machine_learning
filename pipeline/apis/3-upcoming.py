@@ -41,23 +41,24 @@ if __name__ == "__main__":
 
     if rocket_id:
         try:
-            rocket_data = requests.get(
-                'https://api.spacexdata.com/v4/rockets/{}'.format(rocket_id)
-            ).json()
+            rocket_url = "https://api.spacexdata.com/v4/rockets/{}".format(
+                rocket_id)
+            rocket_data = requests.get(rocket_url).json()
             rocket_name = rocket_data.get('name', rocket_name)
         except Exception:
             pass
 
     if launchpad_id:
         try:
-            pad_data = requests.get(
-                'https://api.spacexdata.com/v4/launchpads/{}'.format(launchpad_id)
-            ).json()
+            pad_url = "https://api.spacexdata.com/v4/launchpads/{}".format(
+                launchpad_id)
+            pad_data = requests.get(pad_url).json()
             launchpad_name = pad_data.get('name', launchpad_name)
             launchpad_location = pad_data.get('locality', launchpad_location)
         except Exception:
             pass
 
     print("{} ({}) {} - {} ({})".format(
-        launch_name, launch_date, rocket_name, launchpad_name, launchpad_location
+        launch_name, launch_date, rocket_name,
+        launchpad_name, launchpad_location
     ))
